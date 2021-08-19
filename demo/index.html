@@ -30,21 +30,21 @@
     //
     // await user.save();
     //
-    // await test('insert', async () => {
-    //     let p = [];
-    //     await test('insert_loop', async () => {
-    //
-    //         for (let i = 0; i < 10000; i++) {
-    //             let user = new User({
-    //                 username: i,
-    //                 password: i,
-    //             });
-    //             p.push(user.save());
-    //         }
-    //     });
-    //     await Promise.all(p);
-    // });
-    //
+    await test('insert', async () => {
+        let p = [];
+        await test('insert_loop', async () => {
+
+            for (let i = 0; i < 1000; i++) {
+                let user = new User({
+                    username: i,
+                    password: i,
+                });
+                p.push(user.save());
+            }
+        });
+        await Promise.all(p);
+    });
+
 
 
     await test('User.get_by_id(30000)', async () => {
