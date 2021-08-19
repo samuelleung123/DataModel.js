@@ -1,5 +1,9 @@
 {
+  "scripts": {
+    "build": "esbuild src/DataModel.js --bundle --sourcemap --minify --outfile=dist/DataModel.min.js"
+  },
   "dependencies": {
+    "esbuild": "^0.12.21",
     "localforage": "^1.9.0"
   }
 }
