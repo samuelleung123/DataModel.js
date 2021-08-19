@@ -47,18 +47,27 @@
 
 
 
-    await test('User.get_by_id(30000)', async () => {
-        console.log(await User.get_by_id(30000));
+    await test('User.get_by_id(300)', async () => {
+        console.log(await User.get_by_id(300));
     })
-    await test('User.get_by_id(40000)', async () => {
-        console.log(await User.get_by_id(40000));
+    await test('User.get_by_id(1000)', async () => {
+        console.log(await User.get_by_id(1000));
     })
 
-    // await test('User.query()', async () => {
-    //     let list = await User.query();
-    //
-    //     console.log(list);
-    // })
+    await test('User.query()', async () => {
+        let list = await User.query();
+
+        console.log(list);
+    })
+
+    await test('User.query(callback)', async () => {
+        let list = await User.query((u) => {
+        	return u.user_id > 10;
+        });
+
+        console.log(list);
+    })
+
     async function test(name, cb) {
         let start = Math.random() + '';
         let end = Math.random() + '';
