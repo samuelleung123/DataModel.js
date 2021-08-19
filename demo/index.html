@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+</head>
+<body>
+<h1>HI</h1>
+</body>
+<script type="module">
+    import {DataModel} from "../dist/DataModel.min.js";
+
+    class User extends DataModel {
+        static table = 'User';
+        static primary_key = 'user_id';
+    }
+
+    // User.class_events.on('save', (e) => {
+    //     console.log('class save', e);
+    // });
+    //
+    // let user = new User({
+    //     username: 'abc',
+    //     password: 'abc',
+    // })
+    //
+    // user.model_events.on('save', function (e) {
+    //     console.log('model save', e)
+    // });
+    //
+    // await user.save();
+    //
+    // await test('insert', async () => {
+    //     let p = [];
+    //     await test('insert_loop', async () => {
+    //
+    //         for (let i = 0; i < 10000; i++) {
+    //             let user = new User({
+    //                 username: i,
+    //                 password: i,
+    //             });
+    //             p.push(user.save());
+    //         }
+    //     });
+    //     await Promise.all(p);
+    // });
+    //
+
+
+    await test('User.get_by_id(30000)', async () => {
+        console.log(await User.get_by_id(30000));
+    })
+    await test('User.get_by_id(40000)', async () => {
+        console.log(await User.get_by_id(40000));
+    })
+
+    // await test('User.query()', async () => {
+    //     let list = await User.query();
+    //
+    //     console.log(list);
+    // })
+    async function test(name, cb) {
+        let start = Math.random() + '';
+        let end = Math.random() + '';
+        performance.mark(start);
+        await cb();
+        performance.mark(end);
+        performance.measure(name, start, end);
+        let total_result = performance.getEntriesByName(name);
+        console.log(name, 'duration', total_result[0].duration);
+    }
+
+</script>
+</html>
