@@ -156,6 +156,19 @@ class DataModel {
         return this.constructor.real_save();
     }
 
+    is_changed() {
+        let old_attributes = this.old_attributes;
+        let new_attributes = this.attributes;
+
+        for (let k in old_attributes) {
+            if (old_attributes[k] !== new_attributes[k]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     async fire_event(type, data, emitter = null) {
         if (emitter !== null) {
             emitter.quick_fire(type, data);
