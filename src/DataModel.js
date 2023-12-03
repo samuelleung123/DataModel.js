@@ -180,7 +180,8 @@ class DataModel {
     async delete() {
         let map = await this.constructor.get_map();
         map.delete(this[this.constructor.primary_key]);
-        return this.constructor.real_save();
+        await this.constructor.real_save();
+        this.fire_event('delete', {model: this});
     }
 
     static async get_by_id(id) {
@@ -234,4 +235,5 @@ class DataModel {
 export {
     DataModel,
     localforage,
+    EventTarget,
 }
